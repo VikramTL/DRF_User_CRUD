@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  web:
+    image: drf_cruds
+    container_name: drf_cruds
+    restart: unless-stopped
+    build: .
+    # command: python manage.py runserver 0.0.0.0:8061
+    volumes:
+      - .:/app
+    ports:
+      - "8061:8061"
+    network_mode: host
+    command: >
+      bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8061"
+    
